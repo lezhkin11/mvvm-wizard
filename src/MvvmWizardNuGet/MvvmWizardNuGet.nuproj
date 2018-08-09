@@ -19,7 +19,7 @@
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>MvvmWizard</Id>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Title>Mvvm Wizard</Title>
     <Authors>lezhkin11</Authors>
     <Owners>lezhkin11</Owners>
