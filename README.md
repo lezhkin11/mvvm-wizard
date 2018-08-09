@@ -3,7 +3,8 @@
 
 MvvmWizard gives possibility to create wizard with steps in simply manner.
 It's highly configurable with set of built-in options and styles.
-Supports MahApps.Metro themes
+<br />
+Supports [MahApps.Metro](https://mahapps.com/) themes
 
 ## Demo
 * [bin](https://github.com/lezhkin11/mvvm-wizard/releases/download/1.0.2/mvvm-wizrard-demo-bin.zip)
