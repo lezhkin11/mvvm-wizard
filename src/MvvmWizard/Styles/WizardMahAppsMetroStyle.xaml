@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:MvvmWizard.Controls">
+
+    <Style TargetType="controls:WizardStep" BasedOn="{StaticResource {x:Type controls:WizardStep}}">
+
+        <Setter Property="SummaryItemBrush" Value="{StaticResource AccentColorBrush}" />
+        <Setter Property="ProcessedSummaryItemBrush" Value="{StaticResource AccentColorBrush3}" />
+        <Setter Property="ActiveSummaryItemBrush" Value="{StaticResource AccentColorBrush}" />
+        <Setter Property="SummaryItemMouseOverBrush" Value="{StaticResource AccentBaseColorBrush}" />
+
+        <Setter Property="BackButtonForeground" Value="{StaticResource AccentColorBrush}" />
+        <Setter Property="BackButtonBackground" Value="Transparent" />
+        <Setter Property="BackButtonMouseMouseOverBackground" Value="{StaticResource GrayBrush8}" />
+        <Setter Property="BackButtonBorderBrush" Value="{StaticResource AccentColorBrush}" />
+
+        <Setter Property="SkipButtonForeground" Value="{StaticResource AccentColorBrush}" />
+        <Setter Property="SkipButtonBackground" Value="Transparent" />
+        <Setter Property="SkipButtonMouseMouseOverBackground" Value="{StaticResource GrayBrush8}" />
+        <Setter Property="SkipButtonBorderBrush" Value="{StaticResource AccentColorBrush}" />
+
+        <Setter Property="ForwardButtonForeground" Value="{StaticResource IdealForegroundColorBrush}" />
+        <Setter Property="ForwardButtonBackground" Value="{StaticResource AccentColorBrush}" />
+        <Setter Property="ForwardButtonMouseMouseOverBackground" Value="{StaticResource GrayBrush8}" />
+        <Setter Property="ForwardButtonBorderBrush" Value="{StaticResource AccentColorBrush}" />
+
+    </Style>
+</ResourceDictionary>
