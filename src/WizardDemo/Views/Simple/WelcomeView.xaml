@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <Grid Background="#CCFA6800">
+    <Grid Background="{StaticResource AccentColorBrush}">
 
         <TextBlock FontSize="40"
                    HorizontalAlignment="Center"

@@ -32,7 +32,7 @@
 
     </UserControl.Resources>
 
-    <Grid Background="#CCFA6800">
+    <Grid Background="{StaticResource AccentColorBrush}">
         <Grid.Resources>
             <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
                 <Setter Property="Margin" Value="0,2" />
@@ -363,7 +363,7 @@
 
                     <ComboBox Grid.Column="3" Grid.Row="1" 
                               ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
-                              SelectedValue="{Binding CurrentStep.ForwardButtonBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              SelectedValue="{Binding CurrentStep.ForwardButtonBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue={StaticResource AccentColorBrush}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Name" 
                               mah:TextBoxHelper.Watermark="Forward"/>
@@ -373,21 +373,21 @@
 
                     <ComboBox Grid.Column="1" Grid.Row="2" 
                               ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
-                              SelectedValue="{Binding CurrentStep.BackButtonForeground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              SelectedValue="{Binding CurrentStep.BackButtonForeground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue={StaticResource AccentColorBrush}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Name"
                               mah:TextBoxHelper.Watermark="Back"/>
 
                     <ComboBox Grid.Column="2" Grid.Row="2" 
                               ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
-                              SelectedValue="{Binding CurrentStep.SkipButtonForeground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              SelectedValue="{Binding CurrentStep.SkipButtonForeground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue={StaticResource AccentColorBrush}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Name" 
                               mah:TextBoxHelper.Watermark="Skip"/>
 
                     <ComboBox Grid.Column="3" Grid.Row="2" 
                               ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
-                              SelectedValue="{Binding CurrentStep.ForwardButtonForeground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#FFFFFFFF}"
+                              SelectedValue="{Binding CurrentStep.ForwardButtonForeground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue={StaticResource IdealForegroundColorBrush}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Name" 
                               mah:TextBoxHelper.Watermark="Forward"/>
@@ -397,21 +397,21 @@
 
                     <ComboBox Grid.Column="1" Grid.Row="3" 
                               ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
-                              SelectedValue="{Binding CurrentStep.BackButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#FF454545}"
+                              SelectedValue="{Binding CurrentStep.BackButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue={StaticResource GrayBrush8}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Name"
                               mah:TextBoxHelper.Watermark="Back"/>
 
                     <ComboBox Grid.Column="2" Grid.Row="3" 
                               ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
-                              SelectedValue="{Binding CurrentStep.SkipButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#FF454545}"
+                              SelectedValue="{Binding CurrentStep.SkipButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue={StaticResource GrayBrush8}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Name" 
                               mah:TextBoxHelper.Watermark="Skip"/>
 
                     <ComboBox Grid.Column="3" Grid.Row="3" 
                               ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
-                              SelectedValue="{Binding CurrentStep.ForwardButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#FF454545}"
+                              SelectedValue="{Binding CurrentStep.ForwardButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue={StaticResource GrayBrush8}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Name" 
                               mah:TextBoxHelper.Watermark="Forward"/>
@@ -421,21 +421,21 @@
 
                     <ComboBox Grid.Column="1" Grid.Row="4" 
                               ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
-                              SelectedValue="{Binding CurrentStep.BackButtonBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              SelectedValue="{Binding CurrentStep.BackButtonBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue={StaticResource AccentColorBrush}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Name"
                               mah:TextBoxHelper.Watermark="Back"/>
 
                     <ComboBox Grid.Column="2" Grid.Row="4" 
                               ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
-                              SelectedValue="{Binding CurrentStep.SkipButtonBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              SelectedValue="{Binding CurrentStep.SkipButtonBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue={StaticResource AccentColorBrush}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Name" 
                               mah:TextBoxHelper.Watermark="Skip"/>
 
                     <ComboBox Grid.Column="3" Grid.Row="4" 
                               ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
-                              SelectedValue="{Binding CurrentStep.ForwardButtonBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              SelectedValue="{Binding CurrentStep.ForwardButtonBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue={StaticResource AccentColorBrush}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Name" 
                               mah:TextBoxHelper.Watermark="Forward"/>

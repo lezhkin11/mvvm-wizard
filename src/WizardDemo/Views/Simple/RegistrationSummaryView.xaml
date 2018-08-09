@@ -10,7 +10,7 @@
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
 
         <StackPanel Margin="0,40,0,0">
-            <Border Background="#CCFA6800" Width="300" Height="150">
+            <Border Background="{StaticResource AccentColorBrush}" Width="300" Height="150">
                 <Border.RenderTransform>
                     <RotateTransform Angle="-10" />
                 </Border.RenderTransform>
