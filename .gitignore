@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+
+/.vs/MvvmWizard/v14
+/src/.vs/MvvmWizard/v14
+/src/MvvmWizard/bin
+/src/MvvmWizard/obj
+/src/MvvmWizardNuGet/bin/Release
+/src/MvvmWizardNuGet/obj/Release
+/src/packages
+/src/WizardDemo/bin
+/src/WizardDemo/obj
+/src/MvvmWizardNuGet/obj/Debug
+/src/MvvmWizardNuGet/bin/Debug
