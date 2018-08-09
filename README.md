@@ -30,7 +30,7 @@ WizardSettings.Instance.ViewResolver = viewType => unityContainer.Resolve(viewTy
 ```
 
 ### 3 Create Wizard Control
-xmlns:controls="clr-namespace:MvvmWizard.Controls;assembly=MvvmWizard"
+`xmlns:controls="clr-namespace:MvvmWizard.Controls;assembly=MvvmWizard"`
 
 ```xml
 <controls:Wizard FinishCommand="{Binding CloseCommand}">
