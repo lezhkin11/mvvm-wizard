@@ -1,0 +1,27 @@
+﻿<mah:MetroWindow x:Class="WizardDemo.Views.Advanced.AdvancedDemoDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:controls="clr-namespace:MvvmWizard.Controls;assembly=MvvmWizard"
+        xmlns:advanced="clr-namespace:WizardDemo.Views.Advanced"
+        mc:Ignorable="d"
+        Title="Advanced Settings Demo"
+        TitleCharacterCasing="Normal"
+        Height="480" 
+        Width="900">
+
+    <Grid>
+        <controls:Wizard UseCircularNavigation="True">
+            <controls:WizardStep ViewType="{x:Type advanced:BasicWizardSettingsView}" />
+            <controls:WizardStep ForwardButtonTooltip="Next"  />
+            <controls:WizardStep ForwardButtonTooltip="Finish">
+                <controls:WizardStep.Content>
+                    <TextBox></TextBox>
+                </controls:WizardStep.Content>
+            </controls:WizardStep>
+        </controls:Wizard>
+    </Grid>
+</mah:MetroWindow>
+

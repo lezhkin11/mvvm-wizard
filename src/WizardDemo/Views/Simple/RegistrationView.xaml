@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="WizardDemo.Views.Simple.RegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Grid Margin="40,35,25,0">
+
+        <mah:ProgressRing x:Name="ProgressRing"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Width="140"
+                          Height="140"
+                          IsActive="{Binding IsProcessing}" 
+                          Visibility="{Binding IsProcessing, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <Grid>
+            <Grid.Resources>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Visibility, ElementName=ProgressRing}" Value="Visible">
+                            <Setter Property="Opacity" Value="0.1" />
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Setter Property="Height" Value="35" />
+                    <Setter Property="Margin" Value="0,10" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="mah:TextBoxHelper.ClearTextButton" Value="True" />
+                </Style>
+
+                <Style TargetType="PasswordBox" BasedOn="{StaticResource {x:Type PasswordBox}}">
+                    <Setter Property="Height" Value="35" />
+                    <Setter Property="Margin" Value="0,10" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="mah:TextBoxHelper.ClearTextButton" Value="True" />
+                </Style>
+                
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Create your account" FontSize="35" Margin="0,0,0,20"/>
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Column="0" mah:TextBoxHelper.Watermark="First Name" Margin="0,10,20,10"
+                         Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=200}"/>
+
+                <TextBox Grid.Column="1" mah:TextBoxHelper.Watermark="Last Name" 
+                         Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=200}"/>
+            </Grid>
+
+            <TextBox Grid.Row="2" mah:TextBoxHelper.Watermark="Email" 
+                     Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=200}"/>
+
+            <PasswordBox Grid.Row="3" mah:TextBoxHelper.Watermark="Password" />
+            <PasswordBox Grid.Row="4" mah:TextBoxHelper.Watermark="Confirm Password" />
+
+        </Grid>
+    </Grid>
+</UserControl>

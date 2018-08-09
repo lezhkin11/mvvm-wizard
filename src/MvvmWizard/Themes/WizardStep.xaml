@@ -1,0 +1,104 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:MvvmWizard.Controls">
+
+    <ControlTemplate x:Key="WizardStepTemplate" TargetType="controls:WizardStep">
+        <Ellipse x:Name="SummaryItem" 
+                 Width="{TemplateBinding SummaryItemWidth}"
+                 Height="{TemplateBinding SummaryItemHeight}" 
+                 Fill="{TemplateBinding SummaryItemBrush}" 
+                 Margin="{TemplateBinding Margin}" 
+                 ToolTip="{TemplateBinding ToolTip}"/>
+
+        <ControlTemplate.Triggers>
+            <!-- Active Item -->
+            <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="SummaryItem" Property="Width" Value="{Binding ActiveSummaryItemWidth, RelativeSource={RelativeSource TemplatedParent}}" />
+                <Setter TargetName="SummaryItem" Property="Height" Value="{Binding ActiveSummaryItemHeight, RelativeSource={RelativeSource TemplatedParent}}" />
+                <Setter TargetName="SummaryItem" Property="Fill" Value="{Binding ActiveSummaryItemBrush, RelativeSource={RelativeSource TemplatedParent}}" />
+            </Trigger>
+
+            <!-- Processed Item -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="False" />
+                    <Condition Property="IsProcessed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="SummaryItem" Property="Fill" Value="{Binding ProcessedSummaryItemBrush, RelativeSource={RelativeSource TemplatedParent}}" />
+            </MultiTrigger>
+            
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="False" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="SummaryItem" Property="Fill" Value="{Binding SummaryItemMouseOverBrush, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="controls:WizardStep">
+        <Setter Property="SummaryItemWidth" Value="16" />
+        <Setter Property="SummaryItemHeight" Value="16" />
+        <Setter Property="ActiveSummaryItemWidth" Value="26" />
+        <Setter Property="ActiveSummaryItemHeight" Value="26" />
+
+        <Setter Property="SummaryItemBrush" Value="#CCFA6800" />
+        <Setter Property="ProcessedSummaryItemBrush" Value="#6CFA6800" />
+        <Setter Property="ActiveSummaryItemBrush" Value="#CCFA6800" />
+        <Setter Property="SummaryItemMouseOverBrush" Value="#FFFA6800" />
+
+
+        <Setter Property="BackButtonHeight" Value="50" />
+        <Setter Property="BackButtonMinWidth" Value="60" />
+        <Setter Property="BackButtonMargin" Value="25,10,5,10" />
+        <Setter Property="BackButtonForeground" Value="#CCFA6800" />
+        <Setter Property="BackButtonBackground" Value="Transparent" />
+        <Setter Property="BackButtonMouseMouseOverBackground" Value="#FF454545" />
+        <Setter Property="BackButtonBorderBrush" Value="#CCFA6800" />
+        <Setter Property="BackButtonBorderThickness" Value="2" />
+        <Setter Property="BackButtonCornerRadius" Value="3" />
+        <Setter Property="BackButtonTooltip" Value="Go to Previous Step" />
+        <Setter Property="BackButtonHorizontalContentAlignment" Value="Center" />
+        <Setter Property="BackButtonVerticalContentAlignment" Value="Center" />
+        <Setter Property="BackButtonFontSize" Value="14" />
+        <Setter Property="BackButtonFontWeight" Value="Bold" />
+
+        <Setter Property="SkipButtonHeight" Value="50" />
+        <Setter Property="SkipButtonMinWidth" Value="70" />
+        <Setter Property="SkipButtonMargin" Value="5,10,0,10" />
+        <Setter Property="SkipButtonForeground" Value="#CCFA6800" />
+        <Setter Property="SkipButtonBackground" Value="Transparent" />
+        <Setter Property="SkipButtonMouseMouseOverBackground" Value="#FF454545" />
+        <Setter Property="SkipButtonBorderBrush" Value="#CCFA6800" />
+        <Setter Property="SkipButtonBorderThickness" Value="2" />
+        <Setter Property="SkipButtonCornerRadius" Value="3" />
+        <Setter Property="SkipButtonTitle" Value="Skip" />
+        <Setter Property="SkipButtonTooltip" Value="Skip Current Step" />
+        <Setter Property="SkipButtonHorizontalContentAlignment" Value="Center" />
+        <Setter Property="SkipButtonVerticalContentAlignment" Value="Center" />
+        <Setter Property="SkipButtonFontSize" Value="14" />
+        <Setter Property="SkipButtonFontWeight" Value="Bold" />
+
+        <Setter Property="ForwardButtonHeight" Value="50" />
+        <Setter Property="ForwardButtonMinWidth" Value="150" />
+        <Setter Property="ForwardButtonMargin" Value="10,10,25,10" />
+        <Setter Property="ForwardButtonForeground" Value="White" />
+        <Setter Property="ForwardButtonBackground" Value="#CCFA6800" />
+        <Setter Property="ForwardButtonMouseMouseOverBackground" Value="#FF454545" />
+        <Setter Property="ForwardButtonBorderBrush" Value="#CCFA6800" />
+        <Setter Property="ForwardButtonBorderThickness" Value="2" />
+        <Setter Property="ForwardButtonCornerRadius" Value="3" />
+        <Setter Property="ForwardButtonTitle" Value="Next" />
+        <Setter Property="ForwardButtonTooltip" Value="Go to Next Step" />
+        <Setter Property="ForwardButtonHorizontalContentAlignment" Value="Center" />
+        <Setter Property="ForwardButtonVerticalContentAlignment" Value="Center" />
+        <Setter Property="ForwardButtonFontSize" Value="14" />
+        <Setter Property="ForwardButtonFontWeight" Value="Bold" />
+
+
+        <Setter Property="Margin" Value="7,3" />
+        <Setter Property="Template" Value="{StaticResource WizardStepTemplate}" />
+    </Style>
+    
+</ResourceDictionary>

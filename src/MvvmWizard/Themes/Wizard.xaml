@@ -1,0 +1,92 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:MvvmWizard.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Styles/Button.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <ItemsPanelTemplate x:Key="SummaryPanelTemplate">
+        <StackPanel Orientation="Horizontal" />
+    </ItemsPanelTemplate>
+
+    <ControlTemplate x:Key="WizardTemplate" TargetType="controls:Wizard">
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+
+            <Grid Margin="{TemplateBinding Padding}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ContentControl Grid.Row="0"
+                                Content="{Binding CurrentStep.Content, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                <Grid Grid.Row="1" MinHeight="{TemplateBinding NavigationBlockMinHeight}">
+                    
+                    <!-- Transition Buttons -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="{TemplateBinding TransitionButtonsHorizontalAlignment}" VerticalAlignment="{TemplateBinding TransitionButtonsVerticalAlignment}">
+                        <Button x:Name="PART_BackButton" Style="{TemplateBinding BackButtonStyle}"/>
+                        <Button x:Name="PART_SkipButton" Style="{TemplateBinding SkipButtonStyle}" />
+                        <Button x:Name="PART_ForwardButton" Style="{TemplateBinding ForwardButtonStyle}" />
+                    </StackPanel>
+
+                    <!-- Summary -->
+                    <ItemsControl x:Name="PART_Summary" 
+                                  HorizontalAlignment="{TemplateBinding SummaryHorizontalAlignment}"
+                                  VerticalAlignment="{TemplateBinding SummaryVerticalAlignment}"
+                                  ItemsPanel="{TemplateBinding SummaryPanelTemplate}"
+                                  ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent}}"
+                                  Visibility="{TemplateBinding SummaryVisibility}"
+                                  Margin="{TemplateBinding SummaryMargin}"/>
+                </Grid>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsTransiting, RelativeSource={RelativeSource Self}}" Value="True">
+                <Setter TargetName="PART_Summary" Property="IsEnabled" Value="False" />
+            </DataTrigger>
+
+            <!-- Button Styles -->
+            <Trigger Property="BackButtonStyle" Value="{x:Null}">
+                <Setter TargetName="PART_BackButton" Property="Style" Value="{StaticResource BackButtonStyle}" />
+            </Trigger>
+            
+            <Trigger Property="SkipButtonStyle" Value="{x:Null}">
+                <Setter TargetName="PART_SkipButton" Property="Style" Value="{StaticResource SkipButtonStyle}" />
+            </Trigger>
+            
+            <Trigger Property="ForwardButtonStyle" Value="{x:Null}">
+                <Setter TargetName="PART_ForwardButton" Property="Style" Value="{StaticResource ForwardButtonStyle}" />
+            </Trigger>
+          
+        </ControlTemplate.Triggers>
+        
+    </ControlTemplate>
+
+    <Style TargetType="controls:Wizard">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="NavigationBlockMinHeight" Value="130" />
+
+        <!-- Buttons -->
+        <Setter Property="IsTransitionAnimationEnabled" Value="True" />
+        <Setter Property="TransitionButtonsVerticalAlignment" Value="Center" />
+        <Setter Property="TransitionButtonsHorizontalAlignment" Value="Right" />
+
+        <!-- Summary -->
+        <Setter Property="SummaryPanelTemplate" Value="{StaticResource SummaryPanelTemplate}" />
+        <Setter Property="SummaryVisibility" Value="Visible" />
+        <Setter Property="AllowNavigationOnSummaryItemClick" Value="False" />
+
+        <Setter Property="SummaryHorizontalAlignment" Value="Center" />
+        <Setter Property="SummaryVerticalAlignment" Value="Bottom" />
+        
+        <Setter Property="SummaryMargin" Value="0,10" />
+
+        <Setter Property="Template" Value="{StaticResource WizardTemplate}" />
+    </Style>
+    
+</ResourceDictionary>

@@ -1,0 +1,53 @@
+﻿<mah:MetroWindow x:Class="WizardDemo.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:viewModels="clr-namespace:WizardDemo.ViewModels"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="MVVM Wizard Demo"
+        TitleCharacterCasing="Normal"
+        WindowState="Normal"
+        WindowStartupLocation="CenterScreen"
+        Height="600" 
+        Width="1000">
+
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel />
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.Resources>
+            <iconPacks:PackIconModern x:Key="StartIcon" x:Shared="False" Kind="ControlPlay" Width="70" Height="70" />
+            
+            <Style TargetType="Button" BasedOn="{StaticResource MetroCircleButtonStyle}">
+                <Setter Property="Width" Value="150" />
+                <Setter Property="Height" Value="150" />
+                <Setter Property="Padding" Value="20,0,0,0" />
+                <Setter Property="Content" Value="{StaticResource StartIcon}" />
+            </Style>
+            
+            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="FontSize" Value="35" />
+            </Style>
+        </Grid.Resources>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Command="{Binding StartSimpleDemoCommand}"/>
+            <TextBlock Text="Simple Demo" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Command="{Binding StartAdvancedDemoCommand}"/>
+            <TextBlock Text="Play with Settings" />
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>
+

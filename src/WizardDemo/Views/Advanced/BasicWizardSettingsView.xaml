@@ -1,0 +1,681 @@
+﻿<UserControl x:Class="WizardDemo.Views.Advanced.BasicWizardSettingsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:controls="clr-namespace:MvvmWizard.Controls;assembly=MvvmWizard"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:converters="clr-namespace:WizardDemo.Converters"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:behaviors="clr-namespace:WizardDemo.Behaviors"
+      xmlns:advanced="clr-namespace:WizardDemo.ViewModels.Advanced"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.DataContext>
+        <advanced:BasicWizardSettingsViewModel />
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+
+        <ObjectDataProvider x:Key="AvailableBrushes" ObjectInstance="{x:Type Brushes}" MethodName="GetProperties" />
+        <ObjectDataProvider x:Key="AvailableFontWeights" ObjectInstance="{x:Type FontWeights}" MethodName="GetProperties" />
+        <ObjectDataProvider x:Key="AvailableFontStyles" ObjectInstance="{x:Type FontStyles}" MethodName="GetProperties" />
+
+        <ObjectDataProvider x:Key="AvailableIcons" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="iconPacks:PackIconModernKind"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+    </UserControl.Resources>
+
+    <Grid Background="#CCFA6800">
+        <Grid.Resources>
+            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="Margin" Value="0,2" />
+            </Style>
+
+            <Style TargetType="ComboBox" BasedOn="{StaticResource VirtualisedMetroComboBox}">
+                <Setter Property="MinWidth" Value="200" />
+                <Setter Property="Margin" Value="0,2" />
+                <Setter Property="mah:TextBoxHelper.Watermark" Value="Select Colour" />
+            </Style>
+
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+
+            <!-- Wizard Settings -->
+            <Grid  Margin="10,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Wizard Background -->
+                <Label Grid.Column="0" Grid.Row="0" Content="Background:" />
+                <ComboBox Grid.Column="1" Grid.Row="0" 
+                      ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                      SelectedValue="{Binding Background, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#FF2F2F2F}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Name" />
+
+                <!-- Wizard Border Brush -->
+                <Label Grid.Column="0" Grid.Row="1" Content="Borders:" />
+                <ComboBox Grid.Column="1" 
+                      Grid.Row="1" 
+                      ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                      SelectedValue="{Binding BorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#FFFFFFFF}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Name" />
+
+                <!-- Wizard Border Thickness -->
+                <mah:NumericUpDown Grid.Column="2" Grid.Row="1" Margin="2" Minimum="0"
+                               Value="{Binding BorderThickness, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:ThicknessToDoubleConverter.Instance}, Mode=OneWayToSource, FallbackValue=2}" />
+
+
+                <!-- Wizard Padding -->
+                <Label Grid.Column="0" Grid.Row="2" Content="Padding:" />
+                <mah:NumericUpDown Grid.Column="1" Grid.Row="2" Margin="0,2" Minimum="0"
+                               Value="{Binding Padding, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:ThicknessToDoubleConverter.Instance}, Mode=OneWayToSource, FallbackValue=0}" />
+
+
+                <!-- Wizard NavigationBlockMinHeight -->
+                <Label Grid.Column="0" Grid.Row="3" Content="Nav. Block Min Height:" FontSize="10"/>
+                <mah:NumericUpDown Grid.Column="1" Grid.Row="3" Margin="0,2" Minimum="0"
+                               Value="{Binding NavigationBlockMinHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=130}" />
+            </Grid>
+
+            <!-- Summary/Progress (Wizard Level)-->
+            <Label Content="Summary/Progress (Wizard Level)" FontSize="20"/>
+            <ScrollViewer Height="130">
+                <StackPanel Orientation="Vertical">
+         
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Summary Visibility -->
+                        <Label Content="Visibility:" />
+                        <CheckBox IsChecked="{Binding SummaryVisibility, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:VisibilityToBooleanConverter.Instance}, Mode=OneWayToSource, FallbackValue=True}" />
+
+                        <!-- Summary Allow Navigate On Summary Click -->
+                        <Label Content="Navigate By Click:" />
+                        <CheckBox IsChecked="{Binding AllowNavigationOnSummaryItemClick, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=False}" />
+
+                        <!-- Summary Margin -->
+                        <Label Content="Margin:" />
+                        <TextBox Margin="0,1" MinWidth="80" MaxWidth="80" 
+                                 Text="{Binding SummaryMargin, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, FallbackValue='0,10,0,10'}" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Summary Horizontal Alignment -->
+                        <Label Content="Horizontal Alignment:" Margin="0,2"/>
+                        <Slider TickPlacement="TopLeft" 
+                                TickFrequency="50" 
+                                IsSnapToTickEnabled="True" 
+                                Width="100"
+                                Value="{Binding SummaryHorizontalAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:SliderValueToHorizontalAlignmentConverter.Instance}, Mode=OneWayToSource, FallbackValue=50}"/>
+
+                        <!-- Summary Vertical Alignment -->
+                        <Label Content="Vertical Alignment:" Margin="0,2"/>
+                        <Slider TickPlacement="TopLeft" 
+                                TickFrequency="50" 
+                                IsSnapToTickEnabled="True" 
+                                Width="100"
+                                Value="{Binding SummaryVerticalAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:SliderValueToVerticalAlignmentConverter.Instance}, Mode=OneWayToSource, FallbackValue=100}"/>
+
+                    </StackPanel>
+
+                    <Label Content="Summary (Single Item, Per Step)" FontSize="15"/>
+
+                    <Grid>
+                        <Grid.Resources>
+
+                            <Style TargetType="mah:NumericUpDown" BasedOn="{StaticResource {x:Type mah:NumericUpDown}}">
+                                <Setter Property="Margin" Value="0,1" />
+                                <Setter Property="Minimum" Value="0" />
+                            </Style>
+
+                            <Style TargetType="ComboBox" BasedOn="{StaticResource VirtualisedMetroComboBox}">
+                                <Setter Property="MaxWidth" Value="115" />
+                                <Setter Property="MinWidth" Value="115" />
+                                <Setter Property="Margin" Value="0,1" />
+                                <Setter Property="mah:TextBoxHelper.Watermark" Value="Select Colour" />
+                            </Style>
+
+                        </Grid.Resources>
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Summary Item Width -->
+                        <Label Grid.Column="0" Grid.Row="0" Content="Item Width:" />
+                        <mah:NumericUpDown x:Name="SummaryItemWidth" Grid.Column="1" Grid.Row="0" Value="16">
+                            <i:Interaction.Behaviors>
+                                <behaviors:ApplyValueToAllSummaryItemsBehavior PropertyName="SummaryItemWidth" Value="{Binding Value, ElementName=SummaryItemWidth}"/>
+                            </i:Interaction.Behaviors>
+                        </mah:NumericUpDown>
+
+                        <!-- Summary Active Item Width -->
+                        <Label Grid.Column="2" Grid.Row="0" Content="Active Item Width:" />
+                        <mah:NumericUpDown x:Name="ActiveSummaryItemWidth" Grid.Column="3" Grid.Row="0" Value="26">
+                            <i:Interaction.Behaviors>
+                                <behaviors:ApplyValueToAllSummaryItemsBehavior PropertyName="ActiveSummaryItemWidth" Value="{Binding Value, ElementName=ActiveSummaryItemWidth}"/>
+                            </i:Interaction.Behaviors>
+                        </mah:NumericUpDown>
+
+                        <!-- Summary Item Height -->
+                        <Label Grid.Column="0" Grid.Row="1" Content="Item Height:" />
+                        <mah:NumericUpDown x:Name="SummaryItemHeight" Grid.Column="1" Grid.Row="1" Value="16">
+                            <i:Interaction.Behaviors>
+                                <behaviors:ApplyValueToAllSummaryItemsBehavior PropertyName="SummaryItemHeight" Value="{Binding Value, ElementName=SummaryItemHeight}"/>
+                            </i:Interaction.Behaviors>
+                        </mah:NumericUpDown>
+
+                        <!-- Summary Active Item Height -->
+                        <Label Grid.Column="2" Grid.Row="1" Content="Active Item Height:" />
+                        <mah:NumericUpDown x:Name="ActiveSummaryItemHeight" Grid.Column="3" Grid.Row="1" Value="26">
+                            <i:Interaction.Behaviors>
+                                <behaviors:ApplyValueToAllSummaryItemsBehavior PropertyName="ActiveSummaryItemHeight" Value="{Binding Value, ElementName=ActiveSummaryItemHeight}"/>
+                            </i:Interaction.Behaviors>
+                        </mah:NumericUpDown>
+
+                        <!-- Summary Item Fill Brush -->
+                        <Label Grid.Column="0" Grid.Row="2" Content="Fill Brush:" />
+                        <ComboBox x:Name="SummaryItemBrush" Grid.Column="1" Grid.Row="2" 
+                                  ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                                  SelectedValue="#DF008080"
+                                  DisplayMemberPath="Name"
+                                  SelectedValuePath="Name">
+                            <i:Interaction.Behaviors>
+                                <behaviors:ApplyValueToAllSummaryItemsBehavior PropertyName="SummaryItemBrush" Value="{Binding SelectedValue, ElementName=SummaryItemBrush}"/>
+                            </i:Interaction.Behaviors>
+                        </ComboBox>
+
+                        <!-- Summary Active Item Fill Brush -->
+                        <Label Grid.Column="2" Grid.Row="2" Content="Active Fill Brush:" />
+                        <ComboBox x:Name="ActiveSummaryItemBrush" Grid.Column="3" Grid.Row="2" 
+                                  ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                                  SelectedValue="#DF008080"
+                                  DisplayMemberPath="Name"
+                                  SelectedValuePath="Name">
+                            <i:Interaction.Behaviors>
+                                <behaviors:ApplyValueToAllSummaryItemsBehavior PropertyName="ActiveSummaryItemBrush" Value="{Binding SelectedValue, ElementName=ActiveSummaryItemBrush}"/>
+                            </i:Interaction.Behaviors>
+                        </ComboBox>
+
+                        <!-- Summary Item Mouse Over Brush -->
+                        <Label Grid.Column="0" Grid.Row="3" Content="Mouse Ov. Br.:" />
+                        <ComboBox x:Name="SummaryItemMouseOverBrush" Grid.Column="1" Grid.Row="3" 
+                                  ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                                  SelectedValue="#FF008080"
+                                  DisplayMemberPath="Name"
+                                  SelectedValuePath="Name">
+                            <i:Interaction.Behaviors>
+                                <behaviors:ApplyValueToAllSummaryItemsBehavior PropertyName="SummaryItemMouseOverBrush" Value="{Binding SelectedValue, ElementName=SummaryItemMouseOverBrush}"/>
+                            </i:Interaction.Behaviors>
+                        </ComboBox>
+
+                        <!-- Summary Processed Item  -->
+                        <Label Grid.Column="2" Grid.Row="3" Content="Processed Item Br.:" />
+                        <ComboBox x:Name="ProcessedSummaryItemBrush" Grid.Column="3" Grid.Row="3" 
+                                  ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                                  SelectedValue="#6F008080"
+                                  DisplayMemberPath="Name"
+                                  SelectedValuePath="Name">
+                            <i:Interaction.Behaviors>
+                                <behaviors:ApplyValueToAllSummaryItemsBehavior PropertyName="ProcessedSummaryItemBrush" Value="{Binding SelectedValue, ElementName=ProcessedSummaryItemBrush}"/>
+                            </i:Interaction.Behaviors>
+                        </ComboBox>
+
+                    </Grid>
+
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+
+        <!-- Transition Buttons-->
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            
+            <Label  Content="Transition Buttons (Wizard Level)" FontSize="20"/>
+            
+            <!-- Shared between all buttons (wizard level) -->
+            <StackPanel Margin="0,0,10,0" Orientation="Horizontal">
+
+                <!-- Buttons Horizontal Alignment -->
+                <Label Content="Horizontal Alignment:" Margin="0,2"/>
+                <Slider TickPlacement="TopLeft" 
+                        TickFrequency="50" 
+                        IsSnapToTickEnabled="True" 
+                        Width="100"
+                        Value="{Binding TransitionButtonsHorizontalAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:SliderValueToHorizontalAlignmentConverter.Instance}, Mode=OneWayToSource, FallbackValue=100}"/>
+
+                <!-- Buttons Vertical Alignment -->
+                <Label Content="Vertical Alignment:" Margin="0,2"/>
+                <Slider TickPlacement="TopLeft" 
+                        TickFrequency="50" 
+                        IsSnapToTickEnabled="True" 
+                        Width="100"
+                        Value="{Binding TransitionButtonsVerticalAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:SliderValueToVerticalAlignmentConverter.Instance}, Mode=OneWayToSource, FallbackValue=50}"/>
+            </StackPanel>
+
+            <!-- Per Button and Per Step -->
+            <ScrollViewer Height="225">
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                            <Setter Property="FontSize" Value="10" />
+                        </Style>
+
+                        <Style TargetType="ComboBox" BasedOn="{StaticResource VirtualisedMetroComboBox}">
+                            <Setter Property="MaxWidth" Value="115" />
+                            <Setter Property="MinWidth" Value="115" />
+                            <Setter Property="Margin" Value="0,1" />
+                        </Style>
+
+                        <Style TargetType="mah:NumericUpDown" BasedOn="{StaticResource {x:Type mah:NumericUpDown}}">
+                            <Setter Property="Margin" Value="0,1" />
+                            <Setter Property="Minimum" Value="0" />
+                        </Style>
+
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+
+                        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                            <Setter Property="MaxWidth" Value="115" />
+                            <Setter Property="Margin" Value="0,1" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Content="Transition Buttons (Per Step)" FontSize="15"/>
+
+                    <!-- Buttons Background -->
+                    <Label Grid.Column="0" Grid.Row="1" Content="Background:" />
+
+                    <ComboBox Grid.Column="1" Grid.Row="1" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.BackButtonBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#00000000}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name"
+                              mah:TextBoxHelper.Watermark="Back"/>
+
+                    <ComboBox Grid.Column="2" Grid.Row="1" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.SkipButtonBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#00000000}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Skip"/>
+
+                    <ComboBox Grid.Column="3" Grid.Row="1" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.ForwardButtonBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Forward"/>
+
+                    <!-- Buttons Foreground-->
+                    <Label Grid.Column="0" Grid.Row="2" Content="Foreground:" />
+
+                    <ComboBox Grid.Column="1" Grid.Row="2" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.BackButtonForeground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name"
+                              mah:TextBoxHelper.Watermark="Back"/>
+
+                    <ComboBox Grid.Column="2" Grid.Row="2" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.SkipButtonForeground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Skip"/>
+
+                    <ComboBox Grid.Column="3" Grid.Row="2" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.ForwardButtonForeground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#FFFFFFFF}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Forward"/>
+
+                    <!-- Buttons Mouse Over Background -->
+                    <Label Grid.Column="0" Grid.Row="3" Content="Mouse Over Bg:" />
+
+                    <ComboBox Grid.Column="1" Grid.Row="3" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.BackButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#FF454545}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name"
+                              mah:TextBoxHelper.Watermark="Back"/>
+
+                    <ComboBox Grid.Column="2" Grid.Row="3" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.SkipButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#FF454545}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Skip"/>
+
+                    <ComboBox Grid.Column="3" Grid.Row="3" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.ForwardButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#FF454545}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Forward"/>
+
+                    <!-- Buttons Border Brush -->
+                    <Label Grid.Column="0" Grid.Row="4" Content="Border Brush:" />
+
+                    <ComboBox Grid.Column="1" Grid.Row="4" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.BackButtonBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name"
+                              mah:TextBoxHelper.Watermark="Back"/>
+
+                    <ComboBox Grid.Column="2" Grid.Row="4" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.SkipButtonBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Skip"/>
+
+                    <ComboBox Grid.Column="3" Grid.Row="4" 
+                              ItemsSource="{Binding Source={StaticResource AvailableBrushes}}" 
+                              SelectedValue="{Binding CurrentStep.ForwardButtonBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=#CCFA6800}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Forward"/>
+
+                    <!-- Buttons Border Thickness -->
+                    <Label Grid.Column="0" Grid.Row="5" Content="Border Thickness:" />
+
+                    <mah:NumericUpDown Grid.Column="1" Grid.Row="5" 
+                                       Value="{Binding CurrentStep.BackButtonBorderThickness, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:ThicknessToDoubleConverter.Instance}, Mode=OneWayToSource, FallbackValue=2}" />
+
+                    <mah:NumericUpDown Grid.Column="2" Grid.Row="5" 
+                                       Value="{Binding CurrentStep.SkipButtonBorderThickness, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:ThicknessToDoubleConverter.Instance}, Mode=OneWayToSource, FallbackValue=2}" />
+
+                    <mah:NumericUpDown Grid.Column="3" Grid.Row="5"
+                                       Value="{Binding CurrentStep.ForwardButtonBorderThickness, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:ThicknessToDoubleConverter.Instance}, Mode=OneWayToSource, FallbackValue=2}" />
+
+                    <!-- Buttons Corner Radiuns -->
+                    <Label Grid.Column="0" Grid.Row="6" Content="Corner:" />
+                    
+                    <mah:NumericUpDown Grid.Column="1" Grid.Row="6"
+                                       Value="{Binding CurrentStep.BackButtonCornerRadius, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:CornerRadiusToDoubleConverter.Instance}, Mode=OneWayToSource, FallbackValue=3}" />
+
+                    <mah:NumericUpDown Grid.Column="2" Grid.Row="6" 
+                                       Value="{Binding CurrentStep.SkipButtonCornerRadius, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:CornerRadiusToDoubleConverter.Instance}, Mode=OneWayToSource, FallbackValue=3}" />
+
+                    <mah:NumericUpDown Grid.Column="3" Grid.Row="6"
+                                       Value="{Binding CurrentStep.ForwardButtonCornerRadius, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:CornerRadiusToDoubleConverter.Instance}, Mode=OneWayToSource, FallbackValue=3}" />
+
+                    <!-- Buttons MinWidth -->
+                    <Label Grid.Column="0" Grid.Row="7" Content="Min. Width:" />
+                    
+                    <mah:NumericUpDown Grid.Column="1" Grid.Row="7"
+                                       Value="{Binding CurrentStep.BackButtonMinWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=60}" />
+
+                    <mah:NumericUpDown Grid.Column="2" Grid.Row="7" 
+                                       Value="{Binding CurrentStep.SkipButtonMinWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=70}" />
+
+                    <mah:NumericUpDown Grid.Column="3" Grid.Row="7"
+                                       Value="{Binding CurrentStep.ForwardButtonMinWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=150}" />
+
+                    <!-- Buttons Height -->
+                    <Label Grid.Column="0" Grid.Row="8" Content="Height:" />
+                    
+                    <mah:NumericUpDown Grid.Column="1" Grid.Row="8" 
+                                       Value="{Binding CurrentStep.BackButtonHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=50}" />
+
+                    <mah:NumericUpDown Grid.Column="2" Grid.Row="8" 
+                                       Value="{Binding CurrentStep.SkipButtonHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=50}" />
+
+                    <mah:NumericUpDown Grid.Column="3" Grid.Row="8"
+                                       Value="{Binding CurrentStep.ForwardButtonHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=50}" />
+
+                    <!-- Buttons Visibility -->
+                    <Label Grid.Column="0" Grid.Row="9" Content="Visibility:" />
+
+                    <CheckBox Grid.Column="1" Grid.Row="9" 
+                              IsChecked="{Binding CurrentStep.BackButtonVisibility, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:VisibilityToBooleanConverter.Instance}, Mode=OneWayToSource, FallbackValue=True}" />
+
+                    <CheckBox Grid.Column="2" Grid.Row="9"
+                              IsChecked="{Binding CurrentStep.SkipButtonVisibility, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:VisibilityToBooleanConverter.Instance}, Mode=OneWayToSource, FallbackValue=True}" />
+
+                    <CheckBox Grid.Column="3" Grid.Row="9" 
+                              IsChecked="{Binding CurrentStep.ForwardButtonVisibility, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:VisibilityToBooleanConverter.Instance}, Mode=OneWayToSource, FallbackValue=True}" />
+
+                    <!-- Buttons IsEnabled -->
+                    <Label Grid.Column="0" Grid.Row="10" Content="Enabled:" />
+
+                    <CheckBox Grid.Column="1" Grid.Row="10" 
+                              IsChecked="{Binding CurrentStep.BackButtonIsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=True}" />
+
+                    <CheckBox Grid.Column="2" Grid.Row="10" 
+                              IsChecked="{Binding CurrentStep.SkipButtonIsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=True}" />
+
+                    <CheckBox Grid.Column="3" Grid.Row="10" 
+                              IsChecked="{Binding CurrentStep.ForwardButtonIsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=True}" />
+
+                    <!-- Buttons Title -->
+                    <Label Grid.Column="0" Grid.Row="11" Content="Title:" />
+
+                    <TextBox Grid.Column="1" Grid.Row="11" 
+                             Text="{Binding CurrentStep.BackButtonTitle, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, FallbackValue=Back}" />
+
+                    <TextBox Grid.Column="2" Grid.Row="11" 
+                             Text="{Binding CurrentStep.SkipButtonTitle, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, FallbackValue=Skip}" />
+
+                    <TextBox Grid.Column="3" Grid.Row="11" 
+                             Text="{Binding CurrentStep.ForwardButtonTitle, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, FallbackValue=Next}" />
+
+                    <!-- Buttons Icon -->
+                    <Label Grid.Column="0" Grid.Row="12" Content="Icon:" />
+
+                    <ComboBox Grid.Column="1" Grid.Row="12"
+                              ItemsSource="{Binding Source={StaticResource AvailableIcons}}"
+                              SelectedValue="{Binding CurrentStep.BackButtonIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:ModernIconKindToIconConverter.Instance}, ConverterParameter='0,2,3,0', Mode=OneWayToSource}"
+                              mah:TextBoxHelper.Watermark="Back"/>
+
+                    <ComboBox Grid.Column="2" Grid.Row="12"
+                              MaxWidth="115"
+                              ItemsSource="{Binding Source={StaticResource AvailableIcons}}"
+                              SelectedValue="{Binding CurrentStep.SkipButtonIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:ModernIconKindToIconConverter.Instance}, ConverterParameter='2,2,-5,0', Mode=OneWayToSource}"
+                              mah:TextBoxHelper.Watermark="Skip"/>
+
+                    <ComboBox Grid.Column="3" Grid.Row="12"
+                              ItemsSource="{Binding Source={StaticResource AvailableIcons}}"
+                              SelectedValue="{Binding CurrentStep.ForwardButtonIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:ModernIconKindToIconConverter.Instance}, ConverterParameter='10,2,0,0', Mode=OneWayToSource}"
+                              mah:TextBoxHelper.Watermark="Forward"/>
+
+                    <!-- Buttons Tooltip -->
+                    <Label Grid.Column="0" Grid.Row="13" Content="Tooltip:" />
+
+                    <TextBox Grid.Column="1" Grid.Row="13" 
+                             Text="{Binding CurrentStep.BackButtonTooltip, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, FallbackValue='Go Back'}" />
+
+                    <TextBox Grid.Column="2" Grid.Row="13" 
+                             Text="{Binding CurrentStep.SkipButtonTooltip, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, FallbackValue='Skip Step'}" />
+
+                    <TextBox Grid.Column="3" Grid.Row="13" 
+                             Text="{Binding CurrentStep.ForwardButtonTooltip, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, FallbackValue='Go Next'}" />
+
+                    <!-- Buttons Margin -->
+                    <Label Grid.Column="0" Grid.Row="14" Content="Margin:" />
+
+                    <TextBox Grid.Column="1" Grid.Row="14" 
+                             Text="{Binding CurrentStep.BackButtonMargin, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, FallbackValue='25,10,5,10'}" />
+
+                    <TextBox Grid.Column="2" Grid.Row="14" 
+                             Text="{Binding CurrentStep.SkipButtonMargin, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, FallbackValue='5,10,0,10'}" />
+
+                    <TextBox Grid.Column="3" Grid.Row="14" 
+                             Text="{Binding CurrentStep.ForwardButtonMargin, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, FallbackValue='10,10,25,10'}" />
+
+                    <!-- Buttons Horizontal Content Alignment -->
+                    <Label Grid.Column="0" Grid.Row="15" Content="Hor. Cont. Align.:" />
+
+                    <Slider Grid.Column="1" Grid.Row="15"
+                            TickPlacement="TopLeft" 
+                            TickFrequency="50" 
+                            IsSnapToTickEnabled="True" 
+                            Width="100"
+                            Value="{Binding CurrentStep.BackButtonHorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:SliderValueToHorizontalAlignmentConverter.Instance}, Mode=OneWayToSource, FallbackValue=50}"/>
+
+                    <Slider Grid.Column="2" Grid.Row="15"
+                            TickPlacement="TopLeft" 
+                            TickFrequency="50" 
+                            IsSnapToTickEnabled="True" 
+                            Width="100"
+                            Value="{Binding CurrentStep.SkipButtonHorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:SliderValueToHorizontalAlignmentConverter.Instance}, Mode=OneWayToSource, FallbackValue=50}"/>
+
+                    <Slider Grid.Column="3" Grid.Row="15"
+                            TickPlacement="TopLeft" 
+                            TickFrequency="50" 
+                            IsSnapToTickEnabled="True" 
+                            Width="100"
+                            Value="{Binding CurrentStep.ForwardButtonHorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:SliderValueToHorizontalAlignmentConverter.Instance}, Mode=OneWayToSource, FallbackValue=50}"/>
+
+                    <!-- Buttons Vertical Content Alignment -->
+                    <Label Grid.Column="0" Grid.Row="16" Content="Vert. Cont. Align.:" />
+
+                    <Slider Grid.Column="1" Grid.Row="16"
+                            TickPlacement="TopLeft" 
+                            TickFrequency="50" 
+                            IsSnapToTickEnabled="True" 
+                            Width="100"
+                            Value="{Binding CurrentStep.BackButtonVerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:SliderValueToVerticalAlignmentConverter.Instance}, Mode=OneWayToSource, FallbackValue=50}"/>
+
+                    <Slider Grid.Column="2" Grid.Row="16"
+                            TickPlacement="TopLeft" 
+                            TickFrequency="50" 
+                            IsSnapToTickEnabled="True" 
+                            Width="100"
+                            Value="{Binding CurrentStep.SkipButtonVerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:SliderValueToVerticalAlignmentConverter.Instance}, Mode=OneWayToSource, FallbackValue=50}"/>
+
+                    <Slider Grid.Column="3" Grid.Row="16"
+                            TickPlacement="TopLeft" 
+                            TickFrequency="50" 
+                            IsSnapToTickEnabled="True" 
+                            Width="100"
+                            Value="{Binding CurrentStep.ForwardButtonVerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Converter={x:Static converters:SliderValueToVerticalAlignmentConverter.Instance}, Mode=OneWayToSource, FallbackValue=50}"/>
+
+                    <!-- Buttons FontSize -->
+                    <Label Grid.Column="0" Grid.Row="17" Content="Font Size:" />
+                    
+                    <mah:NumericUpDown Grid.Column="1" Grid.Row="17" 
+                                       Value="{Binding CurrentStep.BackButtonFontSize, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=14}" />
+
+                    <mah:NumericUpDown Grid.Column="2" Grid.Row="17" 
+                                       Value="{Binding CurrentStep.SkipButtonFontSize, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=14}" />
+
+                    <mah:NumericUpDown Grid.Column="3" Grid.Row="17"
+                                       Value="{Binding CurrentStep.ForwardButtonFontSize, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=14}" />
+
+                    <!-- Buttons FontWeight-->
+                    <Label Grid.Column="0" Grid.Row="18" Content="Font Weight:" />
+
+                    <ComboBox Grid.Column="1" Grid.Row="18" 
+                              ItemsSource="{Binding Source={StaticResource AvailableFontWeights}}" 
+                              SelectedValue="{Binding CurrentStep.BackButtonFontWeight, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=Bold}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name"
+                              mah:TextBoxHelper.Watermark="Back"/>
+
+                    <ComboBox Grid.Column="2" Grid.Row="18" 
+                              ItemsSource="{Binding Source={StaticResource AvailableFontWeights}}" 
+                              SelectedValue="{Binding CurrentStep.SkipButtonFontWeight, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=Bold}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Skip"/>
+
+                    <ComboBox Grid.Column="3" Grid.Row="18" 
+                              ItemsSource="{Binding Source={StaticResource AvailableFontWeights}}" 
+                              SelectedValue="{Binding CurrentStep.ForwardButtonFontWeight, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=Bold}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Forward"/>
+
+                    <!-- Buttons FontStyle-->
+                    <Label Grid.Column="0" Grid.Row="19" Content="Font Style:" />
+
+                    <ComboBox Grid.Column="1" Grid.Row="19" 
+                              ItemsSource="{Binding Source={StaticResource AvailableFontStyles}}" 
+                              SelectedValue="{Binding CurrentStep.BackButtonFontStyle, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=Normal}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name"
+                              mah:TextBoxHelper.Watermark="Back"/>
+
+                    <ComboBox Grid.Column="2" Grid.Row="19" 
+                              ItemsSource="{Binding Source={StaticResource AvailableFontStyles}}" 
+                              SelectedValue="{Binding CurrentStep.SkipButtonFontStyle, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=Normal}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Skip"/>
+
+                    <ComboBox Grid.Column="3" Grid.Row="19" 
+                              ItemsSource="{Binding Source={StaticResource AvailableFontStyles}}" 
+                              SelectedValue="{Binding CurrentStep.ForwardButtonFontStyle, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}, Mode=OneWayToSource, FallbackValue=Normal}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name" 
+                              mah:TextBoxHelper.Watermark="Forward"/>
+                </Grid>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</UserControl>

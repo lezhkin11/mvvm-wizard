@@ -1,0 +1,229 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:MvvmWizard.Controls">
+
+    <Style x:Key="CommonTriggersButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="IsTabStop" Value="True" />
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsTransiting, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" Value="True">
+                <Setter Property="IsEnabled" Value="False" />
+            </DataTrigger>
+            
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Path x:Key="DefaultBackIcon" 
+          x:Shared="False" 
+          Width="{Binding (TextElement.FontSize), RelativeSource={RelativeSource Self}}"
+          Height="{Binding (TextElement.FontSize), RelativeSource={RelativeSource Self}}" 
+          Margin="0,2,3,0"
+          Fill="{Binding (TextElement.Foreground), RelativeSource={RelativeSource Self}}"
+          Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z "
+          Stretch="Fill" />
+
+    <StackPanel x:Key="DefaultSkipIcon" x:Shared="False" Orientation="Horizontal">
+        <Path Width="{Binding (TextElement.FontSize), RelativeSource={RelativeSource Self}}" 
+              Height="{Binding (TextElement.FontSize), RelativeSource={RelativeSource Self}}"
+              Margin="2,2,-5,0" 
+              Fill="{Binding (TextElement.Foreground), RelativeSource={RelativeSource Self}}"
+              Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z "
+              Stretch="Fill" />
+        <Path Width="{Binding (TextElement.FontSize), RelativeSource={RelativeSource Self}}" 
+              Height="{Binding (TextElement.FontSize), RelativeSource={RelativeSource Self}}"
+              Margin="0,2,0,0"
+              Fill="{Binding (TextElement.Foreground), RelativeSource={RelativeSource Self}}"
+              Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z "
+              Stretch="Fill" />
+    </StackPanel>
+
+    <Path x:Key="DefaultFowardIcon"
+          x:Shared="False"
+          Width="{Binding (TextElement.FontSize), RelativeSource={RelativeSource Self}}"
+          Height="{Binding (TextElement.FontSize), RelativeSource={RelativeSource Self}}" 
+          Margin="10,2,0,0"
+          Fill="{Binding (TextElement.Foreground), RelativeSource={RelativeSource Self}}"
+          Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z "
+          Stretch="Fill" />
+
+    <Style x:Key="BackButtonStyle" TargetType="Button" BasedOn="{StaticResource CommonTriggersButtonStyle}">
+        <Setter Property="MinWidth"        Value="{Binding CurrentStep.BackButtonMinWidth,        RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="MinHeight"       Value="{Binding CurrentStep.BackButtonMinHeight,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Width"           Value="{Binding CurrentStep.BackButtonWidth,           RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Height"          Value="{Binding CurrentStep.BackButtonHeight,          RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="MaxWidth"        Value="{Binding CurrentStep.BackButtonMaxWidth,        RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="MaxHeight"       Value="{Binding CurrentStep.BackButtonMaxHeight,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Foreground"      Value="{Binding CurrentStep.BackButtonForeground,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Background"      Value="{Binding CurrentStep.BackButtonBackground,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="BorderBrush"     Value="{Binding CurrentStep.BackButtonBorderBrush,     RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="BorderThickness" Value="{Binding CurrentStep.BackButtonBorderThickness, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Margin"          Value="{Binding CurrentStep.BackButtonMargin,          RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="ToolTip"         Value="{Binding CurrentStep.BackButtonTooltip,         RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Visibility"      Value="{Binding CurrentStep.BackButtonVisibility,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="IsEnabled"       Value="{Binding CurrentStep.BackButtonIsEnabled,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="FontSize"        Value="{Binding CurrentStep.BackButtonFontSize,        RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard} }" />
+        <Setter Property="FontWeight"      Value="{Binding CurrentStep.BackButtonFontWeight,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard} }" />
+        <Setter Property="FontStyle"       Value="{Binding CurrentStep.BackButtonFontStyle,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard} }" />
+        <Setter Property="Command"         Value="{Binding TransitionController.PreviousStepCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding CurrentStep.BackButtonHorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding CurrentStep.BackButtonVerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="{Binding CurrentStep.BackButtonCornerRadius, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            
+                            <ContentControl x:Name="PART_ButtonIcon"
+                                            Content="{Binding CurrentStep.BackButtonIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+
+                            <TextBlock Text="{Binding CurrentStep.BackButtonTitle, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" 
+                                       Foreground="{TemplateBinding Foreground}" />
+                        </StackPanel>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        
+                        <DataTrigger Binding="{Binding CurrentStep.BackButtonIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" Value="{x:Null}">
+                            <Setter TargetName="PART_ButtonIcon" Property="Content" Value="{StaticResource DefaultBackIcon}" />
+                        </DataTrigger>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{Binding CurrentStep.BackButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SkipButtonStyle" TargetType="Button" BasedOn="{StaticResource CommonTriggersButtonStyle}">
+        <Setter Property="MinWidth"        Value="{Binding CurrentStep.SkipButtonMinWidth,        RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="MinHeight"       Value="{Binding CurrentStep.SkipButtonMinHeight,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Width"           Value="{Binding CurrentStep.SkipButtonWidth,           RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Height"          Value="{Binding CurrentStep.SkipButtonHeight,          RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="MaxWidth"        Value="{Binding CurrentStep.SkipButtonMaxWidth,        RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="MaxHeight"       Value="{Binding CurrentStep.SkipButtonMaxHeight,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Foreground"      Value="{Binding CurrentStep.SkipButtonForeground,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Background"      Value="{Binding CurrentStep.SkipButtonBackground,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="BorderBrush"     Value="{Binding CurrentStep.SkipButtonBorderBrush,     RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="BorderThickness" Value="{Binding CurrentStep.SkipButtonBorderThickness, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Margin"          Value="{Binding CurrentStep.SkipButtonMargin,          RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="ToolTip"         Value="{Binding CurrentStep.SkipButtonTooltip,         RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Visibility"      Value="{Binding CurrentStep.SkipButtonVisibility,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="IsEnabled"       Value="{Binding CurrentStep.SkipButtonIsEnabled,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="FontSize"        Value="{Binding CurrentStep.SkipButtonFontSize,        RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard} }" />
+        <Setter Property="FontWeight"      Value="{Binding CurrentStep.SkipButtonFontWeight,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard} }" />
+        <Setter Property="FontStyle"       Value="{Binding CurrentStep.SkipButtonFontStyle,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard} }" />
+        <Setter Property="Command"         Value="{Binding TransitionController.SkipStepCommand,  RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding CurrentStep.SkipButtonHorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding CurrentStep.SkipButtonVerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="{Binding CurrentStep.SkipButtonCornerRadius, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+
+                            <TextBlock Text="{Binding CurrentStep.SkipButtonTitle, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" 
+                                       Foreground="{TemplateBinding Foreground}" />
+
+                            <ContentControl x:Name="PART_ButtonIcon" 
+                                            Content="{Binding CurrentStep.SkipButtonIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+
+                        </StackPanel>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        
+                        <DataTrigger Binding="{Binding CurrentStep.SkipButtonIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" Value="{x:Null}">
+                            <Setter TargetName="PART_ButtonIcon" Property="Content" Value="{StaticResource DefaultSkipIcon}" />
+                        </DataTrigger>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{Binding CurrentStep.SkipButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ForwardButtonStyle" TargetType="Button" BasedOn="{StaticResource CommonTriggersButtonStyle}">
+        <Setter Property="MinWidth"        Value="{Binding CurrentStep.ForwardButtonMinWidth,        RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="MinHeight"       Value="{Binding CurrentStep.ForwardButtonMinHeight,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Width"           Value="{Binding CurrentStep.ForwardButtonWidth,           RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Height"          Value="{Binding CurrentStep.ForwardButtonHeight,          RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="MaxWidth"        Value="{Binding CurrentStep.ForwardButtonMaxWidth,        RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="MaxHeight"       Value="{Binding CurrentStep.ForwardButtonMaxHeight,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Foreground"      Value="{Binding CurrentStep.ForwardButtonForeground,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Background"      Value="{Binding CurrentStep.ForwardButtonBackground,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="BorderBrush"     Value="{Binding CurrentStep.ForwardButtonBorderBrush,     RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="BorderThickness" Value="{Binding CurrentStep.ForwardButtonBorderThickness, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Margin"          Value="{Binding CurrentStep.ForwardButtonMargin,          RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="ToolTip"         Value="{Binding CurrentStep.ForwardButtonTooltip,         RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="Visibility"      Value="{Binding CurrentStep.ForwardButtonVisibility,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="IsEnabled"       Value="{Binding CurrentStep.ForwardButtonIsEnabled,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="FontSize"        Value="{Binding CurrentStep.ForwardButtonFontSize,        RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard} }" />
+        <Setter Property="FontWeight"      Value="{Binding CurrentStep.ForwardButtonFontWeight,      RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard} }" />
+        <Setter Property="FontStyle"       Value="{Binding CurrentStep.ForwardButtonFontStyle,       RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard} }" />
+        <Setter Property="Command"         Value="{Binding TransitionController.NextStepCommand,     RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding CurrentStep.ForwardButtonHorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding CurrentStep.ForwardButtonVerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="{Binding CurrentStep.ForwardButtonCornerRadius, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+
+                            <TextBlock Text="{Binding CurrentStep.ForwardButtonTitle, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" 
+                                       Foreground="{TemplateBinding Foreground}" />
+
+                            <ContentControl x:Name="PART_ButtonIcon" 
+                                            Content="{Binding CurrentStep.ForwardButtonIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+
+                        </StackPanel>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        
+                        <DataTrigger Binding="{Binding CurrentStep.ForwardButtonIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" Value="{x:Null}">
+                            <Setter TargetName="PART_ButtonIcon" Property="Content" Value="{StaticResource DefaultFowardIcon}" />
+                        </DataTrigger>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{Binding CurrentStep.ForwardButtonMouseMouseOverBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:Wizard}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

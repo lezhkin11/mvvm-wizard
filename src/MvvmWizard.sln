@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmWizard", "MvvmWizard\MvvmWizard.csproj", "{ECFD17D4-032A-4839-8CD5-74F41BD7BAF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizardDemo", "WizardDemo\WizardDemo.csproj", "{7DD36B79-4EE0-4DDB-A780-14C0D3BE1978}"
+EndProject
+Project("{FF286327-C783-4F7A-AB73-9BCBAD0D4460}") = "MvvmWizardNuGet", "MvvmWizardNuGet\MvvmWizardNuGet.nuproj", "{3B3D125E-41C6-468A-8F43-8EF05D0212C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECFD17D4-032A-4839-8CD5-74F41BD7BAF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECFD17D4-032A-4839-8CD5-74F41BD7BAF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECFD17D4-032A-4839-8CD5-74F41BD7BAF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECFD17D4-032A-4839-8CD5-74F41BD7BAF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD36B79-4EE0-4DDB-A780-14C0D3BE1978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD36B79-4EE0-4DDB-A780-14C0D3BE1978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD36B79-4EE0-4DDB-A780-14C0D3BE1978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD36B79-4EE0-4DDB-A780-14C0D3BE1978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B3D125E-41C6-468A-8F43-8EF05D0212C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B3D125E-41C6-468A-8F43-8EF05D0212C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B3D125E-41C6-468A-8F43-8EF05D0212C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B3D125E-41C6-468A-8F43-8EF05D0212C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
