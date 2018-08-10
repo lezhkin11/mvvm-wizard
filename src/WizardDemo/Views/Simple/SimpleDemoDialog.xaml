@@ -21,6 +21,10 @@
                 </Style>
             </controls:Wizard.Resources>
 
+           <!-- <controls:WizardStep BackButtonVisibility="Collapsed">
+                <simple:WelcomeView />
+            </controls:WizardStep>-->
+            
             <controls:WizardStep ViewType="{x:Type simple:WelcomeView}" BackButtonVisibility="Collapsed" />
             <controls:WizardStep ViewType="{x:Type simple:RegistrationView}" />
             <controls:WizardStep ViewType="{x:Type simple:RegistrationSummaryView}" ForwardButtonTitle="Finish" />
