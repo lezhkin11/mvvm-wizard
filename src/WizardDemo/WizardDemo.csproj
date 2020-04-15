@@ -35,28 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.7.3\lib\net46\CommonServiceLocator.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MahApps.Metro, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.6.4\lib\net46\MahApps.Metro.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MahApps.Metro.IconPacks, Version=2.2.0.12, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.IconPacks.2.2.0\lib\net46\MahApps.Metro.IconPacks.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <PackageReference Include="Unity" Version="5.7.3" />
+    <PackageReference Include="ControlzEx" Version="3.0.2.4" />
+    <PackageReference Include="MahApps.Metro" Version="1.6.4" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="2.2.0" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -65,34 +51,6 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.7.3\lib\net46\Unity.Abstractions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Unity.Configuration, Version=5.2.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.7.3\lib\net46\Unity.Configuration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Unity.Container, Version=5.7.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.7.3\lib\net46\Unity.Container.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Unity.Interception, Version=5.5.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.7.3\lib\net46\Unity.Interception.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Unity.Interception.Configuration, Version=5.1.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.7.3\lib\net46\Unity.Interception.Configuration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Unity.RegistrationByConvention, Version=2.1.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.7.3\lib\net46\Unity.RegistrationByConvention.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.7.3\lib\net46\Unity.ServiceLocation.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -174,7 +132,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
