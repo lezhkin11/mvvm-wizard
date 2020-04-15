@@ -9,6 +9,7 @@
     <PackageTags>WPF Wizard</PackageTags>
     <PackageProjectUrl>https://github.com/lezhkin11/mvvm-wizard</PackageProjectUrl>
     <Copyright>Copyright © 2018</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Styles\Button.xaml" />
