@@ -1,6 +1,6 @@
 # MVVM Wizard
-#### MVVM Wizard for WPF
-
+ [![NuGet](https://img.shields.io/nuget/v/MvvmWizard.svg)](https://www.nuget.org/packages/MvvmWizard)
+ 
 MvvmWizard gives possibility to create wizard with steps in simply manner.
 It's highly configurable with set of built-in options and styles.
 <br />
@@ -17,21 +17,14 @@ Supports [MahApps.Metro](https://mahapps.com/) themes
 ## Usage
 [Documentation](https://github.com/lezhkin11/mvvm-wizard/wiki)
 
-### 1 Install NuGet Package:
-[MvvmWizard](https://www.nuget.org/packages/MvvmWizard)
-
-```
-Install-Package MvvmWizard
-```
-
-### 2 Set ViewResolver
+### 1 Set ViewResolver
 ```csharp
 using MvvmWizard.Classes;
 
 WizardSettings.Instance.ViewResolver = viewType => unityContainer.Resolve(viewType);
 ```
 
-### 3 Create Wizard Control
+### 2 Create Wizard Control
 `xmlns:controls="clr-namespace:MvvmWizard.Controls;assembly=MvvmWizard"`
 
 ```xml
