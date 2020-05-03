@@ -12,13 +12,6 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Styles\Button.xaml" />
-    <None Remove="Styles\WizardMahAppsMetroStyle.xaml" />
-    <None Remove="Themes\Generic.xaml" />
-    <None Remove="Themes\Wizard.xaml" />
-    <None Remove="Themes\WizardStep.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Styles\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -48,6 +41,23 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Styles\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Styles\WizardMahAppsMetroStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Themes\Wizard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Themes\WizardStep.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
