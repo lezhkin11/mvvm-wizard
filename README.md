@@ -1,5 +1,6 @@
 # MVVM Wizard
  [![NuGet](https://img.shields.io/nuget/v/MvvmWizard.svg?style=for-the-badge)](https://www.nuget.org/packages/MvvmWizard)
+ ![GitHub](https://img.shields.io/github/license/lezhkin11/mvvm-wizard?style=for-the-badge)
  
 MvvmWizard gives possibility to create wizard with steps in simply manner.
 It's highly configurable with set of built-in options and styles.
