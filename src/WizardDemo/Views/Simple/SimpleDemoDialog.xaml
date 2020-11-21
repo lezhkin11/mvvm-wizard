@@ -25,9 +25,9 @@
                 <simple:WelcomeView />
             </controls:WizardStep>-->
             
-            <controls:WizardStep ViewType="{x:Type simple:WelcomeView}" BackButtonVisibility="Collapsed" />
-            <controls:WizardStep ViewType="{x:Type simple:RegistrationView}" />
-            <controls:WizardStep ViewType="{x:Type simple:RegistrationSummaryView}" ForwardButtonTitle="Finish" />
+            <controls:WizardStep x:Name="WelcomeStep" ViewType="{x:Type simple:WelcomeView}" BackButtonVisibility="Collapsed" />
+            <controls:WizardStep x:Name="RegistrationStep" ViewType="{x:Type simple:RegistrationView}" />
+            <controls:WizardStep x:Name="SummaryStep" ViewType="{x:Type simple:RegistrationSummaryView}" ForwardButtonTitle="Finish" />
 
         </controls:Wizard>
     </Grid>

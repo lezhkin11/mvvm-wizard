@@ -348,8 +348,8 @@
                                            IsSkipAction = skippingStep,
 
                                            StepIndices =
-                                               this.Items.Cast<WizardStep>().ToDictionary(
-                                                   x => this.Items.IndexOf(x),
+                                               this.Items.Cast<WizardStep>().Select((x, i) => new { Name = x.Name, Index = i}).ToDictionary(
+                                                   x => x.Index,
                                                    x => x.Name),
             };
 
