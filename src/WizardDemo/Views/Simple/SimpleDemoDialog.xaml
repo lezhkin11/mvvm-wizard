@@ -14,7 +14,7 @@
         x:Name="ThisWindow">
 
     <Grid>
-        <controls:Wizard FinishCommand="{Binding CloseCommand, ElementName=ThisWindow}">
+        <controls:Wizard FinishCommand="{Binding CloseCommand, ElementName=ThisWindow}" SharedContext="{Binding SharedContext,  ElementName=ThisWindow}">
             <controls:Wizard.Resources>
                 <Style TargetType="controls:WizardStep" BasedOn="{StaticResource {x:Type controls:WizardStep}}">
                     <Setter Property="SkipButtonVisibility" Value="Collapsed" />

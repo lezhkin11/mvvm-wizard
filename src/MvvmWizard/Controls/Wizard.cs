@@ -22,6 +22,7 @@
     public partial class Wizard : Selector, INotifyPropertyChanged
     {
         // ReSharper disable StyleCop.SA1600
+        public static readonly DependencyProperty SharedContextProperty = DependencyProperty.Register(nameof(SharedContext), typeof(Dictionary<string, object>), typeof(Wizard));
         public static readonly DependencyProperty FinishCommandProperty = DependencyProperty.Register(nameof(FinishCommand), typeof(ICommand), typeof(Wizard));
         public static readonly DependencyProperty UseCircularNavigationProperty = DependencyProperty.Register(nameof(UseCircularNavigation), typeof(bool), typeof(Wizard));
         public static readonly DependencyProperty NavigationBlockMinHeightProperty = DependencyProperty.Register(nameof(NavigationBlockMinHeight), typeof(double), typeof(Wizard));
@@ -100,9 +101,13 @@
         }
 
         /// <summary>
-        /// The shared context.
+        /// Gets or sets the shared context.
         /// </summary>
-        public Dictionary<string, object> SharedContext { get; }
+        public Dictionary<string, object> SharedContext
+        {
+            get { return (Dictionary<string, object>)this.GetValue(SharedContextProperty); }
+            set { this.SetValue(SharedContextProperty, value); }
+        }
 
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;

@@ -17,6 +17,8 @@ namespace WizardDemo.Views.Simple
         public SimpleDemoDialog()
         {
             this.CloseCommand = new SimpleGenericCommand<Dictionary<string, object>>(ExecuteMethod);
+            this.SharedContext = new Dictionary<string, object>();
+            this.SharedContext["In"] = 88;
 
             this.InitializeComponent();
         }
@@ -30,5 +32,7 @@ namespace WizardDemo.Views.Simple
         /// Gets the close command.
         /// </summary>
         public ICommand CloseCommand { get; }
+
+        public Dictionary<string, object> SharedContext { get; }
     }
 }
