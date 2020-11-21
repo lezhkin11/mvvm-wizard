@@ -42,11 +42,6 @@
         private static readonly Storyboard DefaultBackwardTransitionAnimation;
 
         /// <summary>
-        /// The shared context.
-        /// </summary>
-        private readonly Dictionary<string, object> sharedContext;
-
-        /// <summary>
         /// Backing field for the <see cref="IsTransiting"/>.
         /// </summary>
         private bool isTransiting;
@@ -92,17 +87,22 @@
         /// </summary>
         public Wizard()
         { 
-            this.sharedContext = new Dictionary<string, object>();
+            this.SharedContext = new Dictionary<string, object>();
 
             this.TransitionController = new TransitionController(
                 this.ShowPreviousStep,
                 () => this.ShowNextStep(false),
                 () => this.ShowNextStep(true),
                 x => this.FinishCommand?.Execute(x),
-                () => this.sharedContext);
+                () => this.SharedContext);
 
             this.Loaded += this.OnLoaded;
         }
+
+        /// <summary>
+        /// The shared context.
+        /// </summary>
+        public Dictionary<string, object> SharedContext { get; }
 
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
@@ -343,7 +343,7 @@
         {
             var transitionConext = new TransitionContext
                                        {
-                                           SharedContext = this.sharedContext,
+                                           SharedContext = this.SharedContext,
                                            TransitedFromStep = this.CurrentStepIndex,
                                            TransitToStep = transitToIndex,
                                            IsSkipAction = skippingStep,
@@ -389,7 +389,7 @@
                 /* Lasts step and navigating forward. */
                 if (this.IsLastStep && transitToIndex > this.LastStepIndex)
                 {
-                    this.FinishCommand?.Execute(this.sharedContext);
+                    this.FinishCommand?.Execute(this.SharedContext);
                     return;
                 }
             }
