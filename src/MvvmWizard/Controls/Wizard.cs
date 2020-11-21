@@ -98,7 +98,8 @@
                 this.ShowPreviousStep,
                 () => this.ShowNextStep(false),
                 () => this.ShowNextStep(true),
-                () => this.FinishCommand?.Execute(null));
+                x => this.FinishCommand?.Execute(x),
+                () => this.sharedContext);
 
             this.Loaded += this.OnLoaded;
         }
@@ -388,7 +389,7 @@
                 /* Lasts step and navigating forward. */
                 if (this.IsLastStep && transitToIndex > this.LastStepIndex)
                 {
-                    this.FinishCommand?.Execute(null);
+                    this.FinishCommand?.Execute(this.sharedContext);
                     return;
                 }
             }

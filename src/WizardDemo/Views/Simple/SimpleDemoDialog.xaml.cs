@@ -1,4 +1,6 @@
-﻿namespace WizardDemo.Views.Simple
+﻿using System.Collections.Generic;
+
+namespace WizardDemo.Views.Simple
 {
     using System.Windows.Input;
 
@@ -14,9 +16,14 @@
         /// </summary>
         public SimpleDemoDialog()
         {
-            this.CloseCommand = new SimpleCommand(this.Close);
+            this.CloseCommand = new SimpleGenericCommand<Dictionary<string, object>>(ExecuteMethod);
 
             this.InitializeComponent();
+        }
+
+        private void ExecuteMethod(Dictionary<string, object> obj)
+        {
+            this.Close();
         }
 
         /// <summary>

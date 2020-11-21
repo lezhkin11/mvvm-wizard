@@ -1,7 +1,6 @@
 ﻿namespace MvvmWizard.Classes
 {
     using System;
-    using System.Windows.Input;
 
     /// <summary>
     /// The transition controller.
@@ -27,33 +26,34 @@
             Action previousStepMethod,
             Action nextStepMethod,
             Action skipStepMethod,
-            Action finishMethod)
+            Action<object> finishMethod,
+            Func<object> sharedContextFunc)
         {
             this.PreviousStepCommand = new SimpleCommand(previousStepMethod);
             this.NextStepCommand = new SimpleCommand(nextStepMethod);
             this.SkipStepCommand = new SimpleCommand(skipStepMethod);
 
-            this.FinishCommand = new SimpleCommand(finishMethod);
+            this.FinishCommand = new SimpleGenericCommand<object>(finishMethod, sharedContextFunc);
         }
 
         /// <summary>
         /// Gets the command, which performs transition to the previous step.
         /// </summary>
-        public ICommand PreviousStepCommand { get; }
+        public SimpleCommand PreviousStepCommand { get; }
 
         /// <summary>
         /// Gets the command, which performs transition to the next step.
         /// </summary>
-        public ICommand NextStepCommand { get; }
+        public SimpleCommand NextStepCommand { get; }
 
         /// <summary>
         /// Gets the command, which skips the step.
         /// </summary>
-        public ICommand SkipStepCommand { get; }
+        public SimpleCommand SkipStepCommand { get; }
 
         /// <summary>
         /// Gets the command, which closes wizard.
         /// </summary>
-        public ICommand FinishCommand { get; }
+        public SimpleGenericCommand<object> FinishCommand { get; }
     }
 }

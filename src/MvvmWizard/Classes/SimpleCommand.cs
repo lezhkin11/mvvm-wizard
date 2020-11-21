@@ -40,18 +40,8 @@
         /// </param>
         public SimpleCommand(Action executeMethod, Func<bool> canExecuteMethod)
         {
-            if (executeMethod == null)
-            {
-                throw new ArgumentNullException(nameof(executeMethod), "Execute method cannot be null");
-            }
-
-            if (canExecuteMethod == null)
-            {
-                throw new ArgumentNullException(nameof(canExecuteMethod), "CanExecute method cannot be null");
-            }
-
-            this.executeMethod = executeMethod;
-            this.canExecuteMethod = canExecuteMethod;
+            this.executeMethod = executeMethod ?? throw new ArgumentNullException(nameof(executeMethod), "Execute method cannot be null");
+            this.canExecuteMethod = canExecuteMethod ?? throw new ArgumentNullException(nameof(canExecuteMethod), "CanExecute method cannot be null");
         }
 
         /// <inheritdoc />
