@@ -1,4 +1,6 @@
-﻿namespace WizardDemo.Views
+﻿using System.Windows.Threading;
+
+namespace WizardDemo.Views
 {
     using System;
     using System.Windows;
@@ -27,6 +29,20 @@
             customAnimation.Children.Add(animationForward);
 
            // this.Wizard1.ForwardTransitionAnimation = customAnimation;
+
+           App.Current.DispatcherUnhandledException += CurrentOnDispatcherUnhandledException;
+           AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
+        }
+
+        private void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show($"Error: {e.ExceptionObject}");
+        }
+
+        private void CurrentOnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show($"Error: {e.Exception}");
+            e.Handled = true;
         }
     }
 }
