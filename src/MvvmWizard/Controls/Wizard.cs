@@ -229,6 +229,10 @@
         /// <param name="skippingStep">
         /// The skipping step.
         /// </param>
+        /// <remarks>
+        /// awful [async void], but this sends exceptions to [DispatcherUnhandledException], not just silently kills thread.
+        /// Async commands will be a nice improvement, so [async Task] could be used instead.
+        /// </remarks>
         public async void TryTransitTo(int transitToIndex, bool skippingStep = false)
         {
             try
