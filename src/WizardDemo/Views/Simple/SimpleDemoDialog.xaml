@@ -14,6 +14,14 @@
         x:Name="ThisWindow">
 
     <Grid>
+        <!--<Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../../CustomStyles/RectangleWizardStepStyle.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>-->
+
         <controls:Wizard FinishCommand="{Binding CloseCommand, ElementName=ThisWindow}" SharedContext="{Binding SharedContext,  ElementName=ThisWindow}">
             <controls:Wizard.Resources>
                 <Style TargetType="controls:WizardStep" BasedOn="{StaticResource {x:Type controls:WizardStep}}">

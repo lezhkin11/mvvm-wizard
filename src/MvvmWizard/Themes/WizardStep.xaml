@@ -32,7 +32,7 @@
                     <Condition Property="IsSelected" Value="False" />
                     <Condition Property="IsMouseOver" Value="True" />
                 </MultiTrigger.Conditions>
-                <Setter TargetName="SummaryItem" Property="Fill" Value="{Binding SummaryItemMouseOverBrush, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                <Setter TargetName="SummaryItem" Property="Fill" Value="{Binding SummaryItemMouseOverBrush, RelativeSource={RelativeSource TemplatedParent}}" /> 
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
