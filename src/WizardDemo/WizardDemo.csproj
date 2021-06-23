@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="MvvmWizard">
+      <Version>1.1.1</Version>
+    </PackageReference>
     <PackageReference Include="Unity" Version="5.7.3" />
     <PackageReference Include="ControlzEx" Version="3.0.2.4" />
     <PackageReference Include="MahApps.Metro" Version="1.6.4" />
@@ -142,12 +145,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\MvvmWizard\MvvmWizard.csproj">
-      <Project>{ecfd17d4-032a-4839-8cd5-74f41bd7baf0}</Project>
-      <Name>MvvmWizard</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
