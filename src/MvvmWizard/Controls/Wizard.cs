@@ -419,6 +419,11 @@
 
             if (stepToSelect.Content == null && stepToSelect.ViewType != null)
             {
+                if (WizardSettings.Instance.ViewResolver == null)
+                {
+                    throw new NullReferenceException("WizardSettings.Instance.ViewResolver is not set.");
+                }
+
                 stepToSelect.Content = WizardSettings.Instance.ViewResolver(stepToSelect.ViewType);
             }
 
